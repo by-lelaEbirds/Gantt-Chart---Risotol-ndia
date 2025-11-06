@@ -1,0 +1,291 @@
+/* --- Configuração Global e Fontes (Foco no Print) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    /* Cores das Propostas */
+    --color-p1: #0ea5e9; /* Azul (Sky) */
+    --color-p1-bg: #e0f2fe;
+    --color-p2: #f97316; /* Laranja */
+    --color-p2-bg: #fff7ed;
+    --color-p3: #16a34a; /* Verde (Risotolândia-ish) */
+    --color-p3-bg: #f0fdf4;
+
+    /* Cores Base */
+    --color-text: #222;
+    --color-bg: #ffffff;
+    --color-border: #e0e0e0;
+    --color-header-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    font-size: 18px; /* Fonte base maior para legibilidade */
+    line-height: 1.6;
+}
+
+.container {
+    width: 95%;
+    max-width: 1800px; /* Largura máxima para screenshots largos */
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+/* --- Cabeçalho e Títulos --- */
+.main-header, .main-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-header-bg);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.main-footer {
+    border-top: 2px solid var(--color-border);
+    border-bottom: none;
+    font-size: 1rem;
+    color: #777;
+    margin-top: 40px;
+}
+
+h1 {
+    font-size: 3.0rem; /* Super grande */
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+h2 {
+    font-size: 2.2rem; /* Bem grande */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--color-border);
+    padding-bottom: 10px;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+/* --- Seção 1: Cartões de Resumo --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.summary-card {
+    border: 2px solid var(--color-border);
+    border-top: 8px solid; /* Cor da proposta virá do JS */
+    border-radius: 8px;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.summary-card h3 {
+    margin-top: 0;
+}
+
+.summary-card p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+.summary-card .cost-value {
+    font-size: 2.0rem; /* Custo total bem destacado */
+    font-weight: 700;
+    color: #000;
+    margin-top: 10px;
+}
+
+/* --- Seção 2: Gráfico de Gantt --- */
+.gantt-section {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll se for muito largo */
+}
+
+#gantt-container {
+    display: grid;
+    /* 1 Coluna para labels, 1 para a timeline */
+    grid-template-columns: 350px 1fr;
+    border: 1px solid var(--color-border);
+    margin-top: 20px;
+    font-size: 0.9rem; /* Fonte do gráfico um pouco menor */
+}
+
+.gantt-header,
+.gantt-labels,
+.gantt-timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 60px; /* Altura de cada linha do gráfico */
+}
+
+/* Header (Labels | Meses) */
+.gantt-header {
+    grid-column: 1 / -1; /* Ocupa a largura toda */
+    grid-template-columns: 350px 1fr; /* Sincroniza com o grid principal */
+    background-color: #333;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.gantt-header-label, .gantt-header-months {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.gantt-header-label {
+    border-right: 1px solid #555;
+    justify-content: center;
+}
+
+.gantt-header-months {
+    display: grid;
+    padding: 0;
+    text-align: center;
+    /* Colunas dos meses serão definidas pelo JS */
+}
+
+.gantt-month {
+    border-right: 1px dashed #555;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Corpo (Tarefas | Barras) */
+.gantt-labels {
+    border-right: 2px solid var(--color-border);
+    background: var(--color-header-bg);
+}
+
+.gantt-label {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    white-space: normal; /* Permite quebra de linha */
+    line-height: 1.3;
+}
+
+.gantt-label-group {
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: #e9ecef;
+}
+
+.gantt-timeline {
+    position: relative;
+    /* Colunas dos dias serão definidas pelo JS */
+    display: grid;
+    border-left: 1px solid var(--color-border);
+}
+
+.gantt-bar {
+    position: relative;
+    grid-row: auto; /* O JS vai definir a linha */
+    /* A coluna (início e fim) será definida pelo JS */
+    
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    
+    /* Cor será definida pelo JS */
+    color: white;
+    font-weight: 500;
+
+    /* Texto dentro da barra */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 12px;
+    overflow: hidden;
+    font-size: 0.85rem;
+}
+
+/* Foco no Print: Texto claro DENTRO da barra */
+.bar-title {
+    font-weight: 700;
+    font-size: 1.0rem; /* Fonte da tarefa maior */
+}
+.bar-dates {
+    font-size: 0.9rem; /* Fonte da data */
+    opacity: 0.9;
+}
+
+/* Cores das Propostas (serão aplicadas via JS) */
+.bar-p1 { background-color: var(--color-p1); }
+.bar-p2 { background-color: var(--color-p2); }
+.bar-p3 { background-color: var(--color-p3); }
+
+.label-p1 { background-color: var(--color-p1-bg); }
+.label-p2 { background-color: var(--color-p2-bg); }
+.label-p3 { background-color: var(--color-p3-bg); }
+
+
+/* --- Seção 3: Tabelas de Custo --- */
+.cost-tables-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.cost-table-wrapper {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.cost-table-wrapper h3 {
+    margin: 0;
+    padding: 20px;
+    border-bottom: 2px solid; /* Cor da proposta */
+    background: var(--color-header-bg);
+}
+
+.cost-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cost-table th, .cost-table td {
+    padding: 15px; /* Mais padding para clareza */
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.0rem;
+    line-height: 1.4;
+}
+
+.cost-table td:last-child {
+    text-align: right;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.cost-table thead th {
+    background-color: #f1f3f5;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.cost-table tfoot td {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #000;
+    background: #f8f9fa;
+    border-top: 2px solid #ccc;
+}
